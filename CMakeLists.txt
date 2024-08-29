@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(SOURCES
     src/LinkedList.cpp
     src/main.cpp
+        src/BinarySearchTree.cpp
+        include/BinarySearchTree.h
 )
 
 include_directories(include)
