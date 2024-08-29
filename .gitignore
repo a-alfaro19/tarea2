@@ -1,0 +1,10 @@
+# Ignore CLion specific files
+.idea/
+cmake-build-debug/
+cmake-build-release/
+*.iml
+*.iws
+*.ipr
+
+# Ignore build directories
+build/
