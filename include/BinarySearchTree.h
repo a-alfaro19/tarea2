@@ -2,13 +2,10 @@
 
 class BinarySearchTree {
 public:
-    struct Node;
     BinarySearchTree();
     ~BinarySearchTree();
 
-    static Node* insertNode(Node* root, int data);
-
-    static Node* searchNode(Node* root, int key);
+    void insert(int data);
 
 private:
     struct Node {
@@ -17,6 +14,7 @@ private:
         Node* right;
     };
 
+    Node* insertNode(Node* root, int data);
     static Node* createNode(int data);
 
     Node* root;
