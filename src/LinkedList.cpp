@@ -27,29 +27,13 @@ void LinkedList::insert(const int data) {
     }
 }
 
-int LinkedList::search(const int data) const {
-    if (!head) {
-        return -1;
-    }
-
-    int index = 0;
-    const Node* temp = head;
-    while (temp) {
-        if (temp->data == data) {
-            return index;
+bool LinkedList::search(const int value) const {
+    const Node* current = head;
+    while (current != nullptr) {
+        if (current->data == value) {
+            return true;
         }
-        temp = temp->next;
-        index++;
+        current = current->next;
     }
-
-    return -1;
-}
-
-void LinkedList::print() const {
-    const Node* temp = head;
-    while (temp) {
-        std::cout << temp->data << " ";
-        temp = temp->next;
-    }
-    std::cout << std::endl;
+    return false;
 }

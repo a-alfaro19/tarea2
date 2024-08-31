@@ -7,9 +7,11 @@
 
 using namespace std;
 
+const vector<int> AlgorithmsTester::sizes = {10, 2507, 5050, 7502, 10000};
+
 AlgorithmsTester::AlgorithmsTester() {
     sortingAlgorithms[0] = BUBBLE_SORT;
-    sortingAlgorithms[1] = INSERTION_SORT;
+    sortingAlgorithms[1] = SELECTION_SORT;
     sortingAlgorithms[2] = MERGE_SORT;
 
     testCases[0] = BEST_CASE;
@@ -67,10 +69,10 @@ optional<vector<double>> AlgorithmsTester::getTheoreticalComplexity(const string
                     result = n; // O(n)
                 }
             break;
-            case MERGE_SORT:
+            case SELECTION_SORT:
                 result = n * n; // O(n^2)
             break;
-            case INSERTION_SORT:
+            case MERGE_SORT:
                 result = n * log(n); // O(n log n)
             break;
             case LINKED_LIST_SEARCH:
@@ -93,18 +95,6 @@ optional<vector<double>> AlgorithmsTester::getTheoreticalComplexity(const string
     return results;
 }
 
-std::string AlgorithmsTester::testCaseToString(const TestCase testCase) {
-    switch (testCase) {
-        case BEST_CASE:
-            return "Best Case";
-        case AVERAGE_CASE:
-            return "Average Case";
-        case WORST_CASE:
-            return "Worst Case";
-    }
-    return "";
-}
-
 AlgorithmsTester::TestCase AlgorithmsTester::stringToTestCase(const std::string& testCase) {
     if (testCase == "BEST_CASE") return BEST_CASE;
     if (testCase == "AVG_CASE") return AVERAGE_CASE;
@@ -112,22 +102,9 @@ AlgorithmsTester::TestCase AlgorithmsTester::stringToTestCase(const std::string&
     throw std::invalid_argument("Invalid test case");
 }
 
-std::string AlgorithmsTester::sortingAlgorithmToString(const Algorithms algorithm) {
-    switch (algorithm) {
-        case BUBBLE_SORT:
-            return "Bubble Sort";
-        case INSERTION_SORT:
-            return "Insertion Sort";
-        case MERGE_SORT:
-            return "Merge Sort";
-        default:
-            throw std::invalid_argument("Invalid algorithm");
-    }
-}
-
 AlgorithmsTester::Algorithms AlgorithmsTester::stringToSortingAlgorithm(const std::string& algorithm) {
     if (algorithm == "BUBBLE_SORT") return BUBBLE_SORT;
-    if (algorithm == "INSERTION_SORT") return INSERTION_SORT;
+    if (algorithm == "SELECTION_SORT") return SELECTION_SORT;
     if (algorithm == "MERGE_SORT") return MERGE_SORT;
     if (algorithm == "LINKED_LIST_SEARCH") return LINKED_LIST_SEARCH;
     if (algorithm == "BS_TREE_INSERTION") return BS_TREE_INSERTION;
@@ -204,7 +181,7 @@ double AlgorithmsTester::measureTime(const std::function<void()>& func) {
     const auto start = std::chrono::high_resolution_clock::now();
     func();
     const auto end = std::chrono::high_resolution_clock::now();
-    return std::chrono::duration<double, std::milli>(end - start).count();
+    return std::chrono::duration<double>(end - start).count();
 }
 
 double AlgorithmsTester::testSortAlgorithm(const Algorithms algorithm, const TestCase testCase, const int size) {
@@ -226,8 +203,8 @@ double AlgorithmsTester::testSortAlgorithm(const Algorithms algorithm, const Tes
         case BUBBLE_SORT:
             duration = measureTime([&]() { ALGORITHMS::bubbleSort(array, size); });
             break;
-        case INSERTION_SORT:
-            duration = measureTime([&]() { ALGORITHMS::mergeSort(array, size); });
+        case SELECTION_SORT:
+            duration = measureTime([&]() { ALGORITHMS::selectionSort(array, size); });
             break;
         case MERGE_SORT:
             duration = measureTime([&]() { ALGORITHMS::mergeSort(array, size); });

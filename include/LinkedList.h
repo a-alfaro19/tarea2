@@ -20,15 +20,10 @@ public:
 
     /**
      * Search for a node in the list
-     * @param data The data to be searched
-     * @return The index of the node in the list
+     * @param value The data to be searched
+     * @return True if the value is found, false otherwise
      */
-    int search(int data) const;
-
-    /**
-     * Print the list
-     */
-    void print() const;
+    bool search(int value) const;
 
 private:
     /**

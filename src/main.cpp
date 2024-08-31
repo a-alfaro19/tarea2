@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     }
 
     ChartPlotter plotter;
-    plotter.plotResults(algorithmArg, experimentalResult.value(), theoreticalComplexity.value(), testCaseArg);
+    plotter.plotResults(algorithmArg, testCaseArg, experimentalResult.value(), theoreticalComplexity.value());
 
     return app.exec();
 }
